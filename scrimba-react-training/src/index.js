@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function MyApp() {
-    return (
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-        </ul>
-    );
-}
+import MyInfo from './components/App';
 
-// JSX
+import 'bootstrap/dist/css/bootstrap.css';
+
 ReactDOM.render(
-    <MyApp />,
+    <MyInfo />,
     document.getElementById("root")
 );
