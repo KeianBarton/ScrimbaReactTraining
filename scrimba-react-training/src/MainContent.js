@@ -7,7 +7,7 @@ function MainContent() {
     return (
         // We have to use className as JSX is actually using the JavaScript DOM API underneath the hood (document.getElementById(..).className ...)
         <main>
-            <p className="mb-0">Hello {`${firstName} ${lastName}`}!</p>
+            <p className="mb-0" style={{color: blue, backgroundColor: black}}>Hello {`${firstName} ${lastName}`}!</p>
         </main>
     );
 };
