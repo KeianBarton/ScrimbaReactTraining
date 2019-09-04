@@ -1,10 +1,13 @@
 import React from "react";
 
 function MainContent() {
+    const firstName = "Bob";
+    const lastName = "Ziroll";
+
     return (
         // We have to use className as JSX is actually using the JavaScript DOM API underneath the hood (document.getElementById(..).className ...)
         <main>
-            <p className="mb-0">Main content</p>
+            <p className="mb-0">Hello {`${firstName} ${lastName}`}!</p>
         </main>
     );
 };
