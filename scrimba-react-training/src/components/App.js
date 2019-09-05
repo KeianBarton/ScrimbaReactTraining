@@ -7,7 +7,6 @@ class App extends Component { // instead of React.Component, we use a named expo
     }
 
     render() {
-        console.log(this.props.whatever);
         return (
             <>
                 <TestComponent whatever="foo" />
