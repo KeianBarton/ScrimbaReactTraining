@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-class App extends Component { // instead of React.Component, we use a named exported module
-    yourMethodHere() {
-
+class App extends Component {
+    constructor(props) {
+        super(props);
+        // state are mutable variables initialised and managed by the component and can be updated everywhere
+        // props are immutable variables passed from parent components
+        this.state = {
+            answer: "Yes"
+        };
     }
 
     render() {
         return (
             <>
-                <TestComponent whatever="foo" />
+                <TestComponent answer={this.state.answer} />
             </>
         );
     }
@@ -19,7 +24,7 @@ class TestComponent extends Component {
     render() {
         return (
             <>
-                <h1>{this.props.whatever}</h1>
+                <h1>{this.props.answer}</h1>
             </>
         );
     }
