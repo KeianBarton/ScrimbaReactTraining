@@ -1,17 +1,16 @@
-import React from "react";
+import { Component } from "react";
 
-import Header from "./Header";
-import MainContent from "./MainContent";
-import Footer from "./Footer";
+class App extends Component { // instead of React.Component, we use a named exported module
+    yourMethodHere() {
 
-function App() {
-    return (
-        <>
-            <Header />
-            <MainContent />
-            <Footer />
-        </>
-    )
+    }
+
+    render() {
+        return
+            <>
+                <h1>{this.props.whatever}</h1>
+            </>;
+    }
 }
 
 export default App;
