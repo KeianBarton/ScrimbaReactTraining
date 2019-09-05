@@ -5,9 +5,9 @@ function ContactCard(props) {
     return (
         <div className="contact-card">
             <img src={contact.imgUrl} alt={`Image of ${contact.name}`}/>
-            <h3>{contact.name}</h3>
-            <p>{contact.phone}</p>
-            <p>{contact.email}</p>
+            <h3 style={{display: contact.name ? "block" : "none"}}>{contact.name}</h3>
+            <p style={{display: contact.phone ? "block" : "none"}}>{contact.phone}</p>
+            <p style={{display: contact.email ? "block" : "none"}}>{contact.email}</p>
         </div>
     );
 };

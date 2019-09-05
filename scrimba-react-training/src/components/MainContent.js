@@ -33,12 +33,7 @@ function MainContent() {
             />
             
             <ContactCard 
-                contact={
-                    {name: "Felix",
-                    imgUrl: "http://placekitten.com/200/100",
-                    phone: "(212) 555-4567",
-                    email: "thecat@hotmail.com"
-                }}
+                contact={{imgUrl: "http://placekitten.com/200/100"}}
             />
         </div>
     );
