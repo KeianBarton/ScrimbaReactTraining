@@ -10,9 +10,16 @@ class App extends Component {
         this.state = { todos: todosData };
     }
 
+    handleClick = () => alert("Button Clicked!");
+
     render = () => {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} />);
-        return <div className="todo-list">{todoItems}</div>;
+        return <>
+            <div className="todo-list">
+                {todoItems}
+            </div>
+            <button onClick={this.handleClick}>Click Me</button>
+        </>;
     }
 
 }
