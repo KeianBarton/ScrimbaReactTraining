@@ -7,6 +7,17 @@ class App extends Component { // instead of React.Component, we use a named expo
     }
 
     render() {
+        console.log(this.props.whatever);
+        return (
+            <>
+                <TestComponent whatever="foo" />
+            </>
+        );
+    }
+}
+
+class TestComponent extends Component {
+    render() {
         return (
             <>
                 <h1>{this.props.whatever}</h1>
@@ -15,6 +26,6 @@ class App extends Component { // instead of React.Component, we use a named expo
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root")); // note we can't use props on the outermost element
 
 export default App;
