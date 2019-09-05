@@ -7,10 +7,10 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = todosData.map(item => <TodoItem key={item.id} item={item} />);
+        this.state = { todoItems: todosData.map(item => <TodoItem key={item.id} item={item} />)};
     }
 
-    render = () => <div className="todo-list">{this.state}</div>;
+    render = () => <div className="todo-list">{this.state.todoItems}</div>;
 
 }
 
