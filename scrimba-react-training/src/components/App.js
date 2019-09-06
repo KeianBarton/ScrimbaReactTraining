@@ -44,9 +44,9 @@ class App extends Component {
     }
 
     betterFormHandleChange(event) {
-        let target = event.target;
+        const {name, value} = event.target; // have a search for React synthetic events
         this.setState(prevState => {
-            prevState[target.name] = target.value;
+            prevState[name] = value;
             return prevState;
         });
     }
