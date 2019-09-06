@@ -81,7 +81,8 @@ class App extends Component {
     render = () => {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>);
         return <>
-            <ConditionalExample isLoading={this.state.isLoading} />
+            {this.state.isLoading ? <h1>Loading...</h1> : <ConditionalExample />}
+            {/*<ConditionalExample isLoading={this.state.isLoading} />*/}
             <div className="todo-list">
                 {todoItems}
             </div>
