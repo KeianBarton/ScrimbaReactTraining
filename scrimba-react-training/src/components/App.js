@@ -131,8 +131,8 @@ class App extends Component {
                 <h1>{this.state.firstName}</h1>
             </form>
             <form>
-                <input type="text" placeholder="First Name" name="firstName" onChange={this.betterFormHandleChange} />
-                <input type="text" placeholder="Last Name" name="lastName" onChange={this.betterFormHandleChange} />
+                <input type="text" placeholder="First Name" name="firstName" value={this.state.firstName} onChange={this.betterFormHandleChange} />
+                <input type="text" placeholder="Last Name" name="lastName" value={this.state.lastName} onChange={this.betterFormHandleChange} />
                 <h1>{this.state.firstName} {this.state.lastName}</h1>
             </form>
         </>;
