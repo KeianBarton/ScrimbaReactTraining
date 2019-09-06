@@ -14,9 +14,6 @@ class App extends Component {
         super(props);
         this.state = { todos: todosData, isLoading: true };
         this.handleChange = this.handleChange.bind(this);
-        setTimeout(() => {
-            this.setState({ isLoading: false });
-        }, 1500);
     }
 
     handleChange(id) {
@@ -33,7 +30,12 @@ class App extends Component {
 
     // Just mounted to screen - very first time component shown on scren
     componentDidMount() {
-        // GET the data I need to correctly display
+        setTimeout(() => {
+            this.setState(prevState => {
+                prevState.isLoading = false;
+                return prevState;
+             });
+        }, 1500);
     }
 
 
@@ -66,6 +68,7 @@ class App extends Component {
 
     // Invoked before rendering when new props or state are received - defaults to true - not called when forceUpdate is used
     shouldComponentUpdate(nextProps, nextState) {
+        return true;
     }
 
     // Invoked when component unmounts from screen
