@@ -12,7 +12,7 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { todos: todosData, isLoading: true };
+        this.state = { todos: todosData, isLoading: false, starWarsCharacter: {} };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -30,12 +30,23 @@ class App extends Component {
 
     // Just mounted to screen - very first time component shown on scren
     componentDidMount() {
-        setTimeout(() => {
-            this.setState(prevState => {
-                prevState.isLoading = false;
-                return prevState;
-             });
-        }, 1500);
+        // fetch
+        // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
+        // testing with star wars API - https://swapi.co
+        // promises - https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261
+        this.setState(prevState => {
+            prevState.isLoading = true;
+            return prevState;
+        })
+        fetch("https://swapi.co/api/people/1")
+            .then(response => response.json())
+            .then(jsonData => {
+                this.setState(prevState => {
+                    prevState.starWarsCharacter = jsonData;
+                    prevState.isLoading = false;
+                    return prevState;
+                });
+            });
     }
 
 
@@ -80,6 +91,7 @@ class App extends Component {
     // Any time React determines state or props changes, ernder is run
     render = () => {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>);
+        let loadingText = this.state.isLoading ? "Loading..." : this.state.starWarsCharacter.name;
         return <>
             {/*this.state.isLoading && <h1>Loading...</h1>     && JavaScript example*/}
             {this.state.isLoading ? <h1>Loading...</h1> : <ConditionalExample />}
@@ -87,6 +99,7 @@ class App extends Component {
             <div className="todo-list">
                 {todoItems}
             </div>
+            <p>{loadingText}</p>
         </>;
     }
 
