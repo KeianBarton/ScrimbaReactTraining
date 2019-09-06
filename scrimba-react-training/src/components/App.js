@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import TodoItem from "./TodoItem";
+import ConditionalExample from "./ConditionalExample";
 import todosData from "../todosData";
 
 class App extends Component {
@@ -11,8 +12,11 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { todos: todosData };
+        this.state = { todos: todosData, isLoading: true };
         this.handleChange = this.handleChange.bind(this);
+        setTimeout(() => {
+            this.setState({ isLoading: false });
+        }, 1500);
     }
 
     handleChange(id) {
@@ -33,12 +37,32 @@ class App extends Component {
     }
 
 
+
     // TO BE DEPRECATED - Props received from parent component - runs on mount and every time props changed
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.whatever !== this.props.whatever) {
             // do something important here
         }
     }
+    UNSAFE_componentWillMount() {
+    }
+    UNSAFE_componentWillUpdate() {
+    }
+
+    // You probably don't need this method:
+    static getDerivedStateFromProps(props, state) {
+        // return the new, updated state based upon the props
+        // https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops
+        // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+    }
+
+    getSnapshotBeforeUpdate() {
+        // create a backup of the current way things are
+        // not commonly used
+        // https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate
+    }
+
+
 
     // Invoked before rendering when new props or state are received - defaults to true - not called when forceUpdate is used
     shouldComponentUpdate(nextProps, nextState) {
@@ -54,6 +78,7 @@ class App extends Component {
     render = () => {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>);
         return <>
+            <ConditionalExample isLoading={this.state.isLoading} />
             <div className="todo-list">
                 {todoItems}
             </div>
