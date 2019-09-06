@@ -12,8 +12,15 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { todos: todosData, isLoading: false, starWarsCharacter: {} };
+        this.state = {
+            todos: todosData,
+            isLoading: false,
+            starWarsCharacter: {},
+            firstName: ""
+        };
         this.handleChange = this.handleChange.bind(this);
+        this.handleFormFirstNameChange = this.handleFormFirstNameChange.bind(this);
+        this.betterFormHandleChange = this.betterFormHandleChange.bind(this);
     }
 
     handleChange(id) {
@@ -27,6 +34,25 @@ class App extends Component {
             return updatedTodos;
         });
     }
+
+    handleFormFirstNameChange(event) {
+        let target = event.target;
+        this.setState(prevState => {
+            prevState.firstName = target.value;
+            return prevState;
+        });
+    }
+
+    betterFormHandleChange(event) {
+        let target = event.target;
+        this.setState(prevState => {
+            prevState[target.name] = target.value;
+            return prevState;
+        });
+    }
+
+    // Forms
+    // https://reactjs.org/docs/forms.html
 
     // Just mounted to screen - very first time component shown on scren
     componentDidMount() {
@@ -100,6 +126,15 @@ class App extends Component {
                 {todoItems}
             </div>
             <p>{loadingText}</p>
+            <form>
+                <input type="text" placeholder="First Name" onChange={this.handleFormFirstNameChange} />
+                <h1>{this.state.firstName}</h1>
+            </form>
+            <form>
+                <input type="text" placeholder="First Name" name="firstName" onChange={this.betterFormHandleChange} />
+                <input type="text" placeholder="Last Name" name="lastName" onChange={this.betterFormHandleChange} />
+                <h1>{this.state.firstName} {this.state.lastName}</h1>
+            </form>
         </>;
     }
 
