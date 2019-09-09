@@ -189,6 +189,9 @@ class App extends Component {
                         onChange={this.betterFormHandleChange}
                     /> Other
                 </label>
+
+                {/* Simple React forms library - Formik */}
+
             </form>
         </>;
     }
