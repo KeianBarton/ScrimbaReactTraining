@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ConditionalExample from "./ConditionalExample";
-import FormAppPractical from "./FormAppPractical";
+import FormContainer from "./FormContainer";
 import TodoItem from "./TodoItem";
 
 import todosData from "../todosData";
@@ -216,7 +216,7 @@ class App extends Component {
 
             <br />
             <hr />
-            <FormAppPractical />
+            <FormContainer />
         </>;
     }
 

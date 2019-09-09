@@ -1,77 +1,46 @@
 import React, { Component } from "react";
 
-class FormAppPractical extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: "",
-            lastName: "",
-            age: "",
-            gender: "",
-            location: "",
-            dietaryRestrictions: {
-                isVegan: false,
-                isNutAllergy: false,
-                isGlutenAllergy: false
-            }
-        };
-
-        this.handleFormChange = this.handleFormChange.bind(this);
-    }
-
-    handleFormChange(event) {
-        const { name, value, type, checked } = event.target;
-
-        if (type === "checkbox" && name.startsWith("diet_")) {
-            this.setState(prevState => prevState.dietaryRestrictions[name.slice("diet_".length)] = checked);
-            return;
-        }
-
-        this.setState({
-            [name]: value
-        });
-    }
-    
+class FormComponent extends Component {
     render() {
         let genderText = "";
-        switch(this.state.gender) {
+        switch(this.props.data.gender) {
             case "":
                 genderText = "";                break;
             default:
-                genderText = `${this.state.gender[0].toLocaleUpperCase()}${this.state.gender.slice(1)}`;
+                genderText = `${this.props.data.gender[0].toLocaleUpperCase()}${this.props.data.gender.slice(1)}`;
         }
         
-        let dietaryRequirements = [];
-        if(this.state.dietaryRestrictions.isVegan) dietaryRequirements.push("Vegan");
-        if(this.state.dietaryRestrictions.isNutAllergy) dietaryRequirements.push("Nut Allergy");
-        if(this.state.dietaryRestrictions.isGlutenAllergy) dietaryRequirements.push("Gluten Allergy");
-        dietaryRequirements = dietaryRequirements.join(", ");
+        let dietaryRestrictions = [];
+        if(this.props.data.dietaryRestrictions.isVegan) dietaryRestrictions.push("Vegan");
+        if(this.props.data.dietaryRestrictions.isNutAllergy) dietaryRestrictions.push("Nut Allergy");
+        if(this.props.data.dietaryRestrictions.isGlutenAllergy) dietaryRestrictions.push("Gluten Allergy");
+        dietaryRestrictions = dietaryRestrictions.join(", ");
 
         return (
-            <main>
+            <>
                 <form>
                     <input
                         name="firstName"
                         type="text"
-                        value={this.state.firstName}
+                        value={this.props.data.firstName}
                         placeholder="First Name"
-                        onChange={this.handleFormChange}
+                        onChange={this.props.handleFormChange}
                     />
                     <br />
                     <input
                         name="lastName"
                         type="text"
-                        value={this.state.lastName}
+                        value={this.props.data.lastName}
                         placeholder="Last Name"
-                        onChange={this.handleFormChange}
+                        onChange={this.props.handleFormChange}
                     />
                     <br />
                     <input
                         name="age"
                         type="number"
-                        value={this.state.age}
+                        value={this.props.data.age}
                         placeholder="Age"
-                        onChange={this.handleFormChange}
+                        onChange={this.props.handleFormChange}
                     />
                     <br />
 
@@ -82,7 +51,7 @@ class FormAppPractical extends Component {
                                 type="radio"
                                 name="gender"
                                 value="male"
-                                onChange={this.handleFormChange}
+                                onChange={this.props.handleFormChange}
                             /> Male
                         </label>
                         <label>
@@ -90,7 +59,7 @@ class FormAppPractical extends Component {
                                 type="radio"
                                 name="gender"
                                 value="female"
-                                onChange={this.handleFormChange}
+                                onChange={this.props.handleFormChange}
                             /> Female
                         </label>
                     </p>
@@ -98,8 +67,8 @@ class FormAppPractical extends Component {
                     <label>Location: 
                         <select
                             name="location"
-                            value={this.state.location}
-                            onChange={this.handleFormChange}
+                            value={this.props.data.location}
+                            onChange={this.props.handleFormChange}
                             required
                         >
                             <option value="" disabled className="d-none"></option>
@@ -114,24 +83,24 @@ class FormAppPractical extends Component {
                         <input
                             name="diet_isVegan"
                             type="checkbox"
-                            checked={this.state.dietaryRestrictions.isVegan}
-                            onChange={this.handleFormChange}
+                            checked={this.props.data.dietaryRestrictions.isVegan}
+                            onChange={this.props.handleFormChange}
                         />Vegan
                     </label>
                     <label>
                         <input
                             name="diet_isNutAllergy"
                             type="checkbox"
-                            checked={this.state.dietaryRestrictions.isNutAllergy}
-                            onChange={this.handleFormChange}
+                            checked={this.props.data.dietaryRestrictions.isNutAllergy}
+                            onChange={this.props.handleFormChange}
                         />Nut Allergy
                     </label>
                     <label>
                         <input
                             name="diet_isGlutenAllergy"
                             type="checkbox"
-                            checked={this.state.dietaryRestrictions.isGlutenAllergy}
-                            onChange={this.handleFormChange}
+                            checked={this.props.data.dietaryRestrictions.isGlutenAllergy}
+                            onChange={this.props.handleFormChange}
                         />Gluten Allergy
                     </label>
                     <br />
@@ -140,16 +109,16 @@ class FormAppPractical extends Component {
                 </form>
                 <hr />
                 <h2>Entered information:</h2>
-                <p>Your name: {this.state.firstName} {this.state.lastName}</p>
-                <p>Your age: {this.state.age}</p>
+                <p>Your name: {this.props.data.firstName} {this.props.data.lastName}</p>
+                <p>Your age: {this.props.data.age}</p>
                 <p>Your gender: {genderText}</p>
-                <p>Your destination: {this.state.location}</p>
+                <p>Your destination: {this.props.data.location}</p>
                 <p>
-                    Your dietary restrictions: {dietaryRequirements}
+                    Your dietary restrictions: {dietaryRestrictions}
                 </p>
-            </main>
-        )
+            </>
+        );
     }
 }
 
-export default FormAppPractical;
+export default FormComponent;
