@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import ConditionalExample from "./ConditionalExample";
 import FormContainer from "./FormContainer";
 import TodoItem from "./TodoItem";
+import MemeHeader from "./MemeHeader";
+import MemeGenerator from "./MemeGenerator";
 
 import todosData from "../todosData";
 
@@ -136,6 +138,9 @@ class App extends Component {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>);
         let loadingText = this.state.isLoading ? "Loading..." : this.state.starWarsCharacter.name;
         return <>
+            <MemeHeader />
+            <MemeGenerator />
+            <br />
             {/*this.state.isLoading && <h1>Loading...</h1>     && JavaScript example*/}
             {this.state.isLoading ? <h1>Loading...</h1> : <ConditionalExample />}
             {/*<ConditionalExample isLoading={this.state.isLoading} />*/}
