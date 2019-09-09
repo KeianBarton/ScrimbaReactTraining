@@ -125,6 +125,10 @@ class App extends Component {
         // (E.g. remove event listener)
     }
 
+    handleSubmit(event) {
+        // submit data to API etc
+    }
+
     // Any time React determines state or props changes, ernder is run
     render = () => {
         let todoItems = this.state.todos.map(item => <TodoItem key={item.id} item={item} handleChange={this.handleChange}/>);
@@ -141,7 +145,7 @@ class App extends Component {
                 <input type="text" placeholder="First Name" onChange={this.handleFormFirstNameChange} />
                 <p>State: {this.state.firstName}</p>
             </form>
-            <form>
+            <form onSubmit={this.handleFormSubmit}>
                 {/* By using 'value', we use controlled form to ensure state is the single source of truth */ }
                 <input type="text" placeholder="First Name" name="firstName" value={this.state.firstName} onChange={this.betterFormHandleChange} />
                 <input type="text" placeholder="Last Name" name="lastName" value={this.state.lastName} onChange={this.betterFormHandleChange} />
@@ -204,6 +208,8 @@ class App extends Component {
                     <option value="red">Red</option>
                     <option value="green">Green</option>
                 </select>
+
+                <button>Submit</button> {/* in HTML5, a button will automatically submit so you don't always need <input type="submit" ...></input>*/}
             </form>
         </>;
     }
