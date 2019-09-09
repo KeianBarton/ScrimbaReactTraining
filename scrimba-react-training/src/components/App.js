@@ -20,7 +20,8 @@ class App extends Component {
             lastName: "",
             textArea: "",
             checkBoxExample: false,
-            radioExampleGender: ""
+            radioExampleGender: "",
+            favColor: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleFormFirstNameChange = this.handleFormFirstNameChange.bind(this);
@@ -192,6 +193,17 @@ class App extends Component {
 
                 {/* Simple React forms library - Formik */}
 
+                <br />
+                <label>Favourite Colour:</label>
+                <select
+                    name="favColor"
+                    value={this.state.favColor}
+                    onChange={this.betterFormHandleChange}
+                >
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                </select>
             </form>
         </>;
     }
