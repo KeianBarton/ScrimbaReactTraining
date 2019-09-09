@@ -16,7 +16,10 @@ class App extends Component {
             todos: todosData,
             isLoading: false,
             starWarsCharacter: {},
-            firstName: ""
+            firstName: "",
+            lastName: "",
+            textArea: "",
+            checkBoxExample: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleFormFirstNameChange = this.handleFormFirstNameChange.bind(this);
@@ -44,8 +47,14 @@ class App extends Component {
     }
 
     betterFormHandleChange(event) {
-        const {name, value} = event.target; // have a search for React synthetic events
+        const {name, value, type, checked} = event.target; // have a search for React synthetic events
+
+        type === "checkbox" ? 
         this.setState(prevState => {
+            prevState[name] = checked;
+            return prevState;
+        })      
+        : this.setState(prevState => {
             prevState[name] = value;
             return prevState;
         });
@@ -128,13 +137,28 @@ class App extends Component {
             <p>{loadingText}</p>
             <form>
                 <input type="text" placeholder="First Name" onChange={this.handleFormFirstNameChange} />
-                <h1>{this.state.firstName}</h1>
+                <p>State: {this.state.firstName}</p>
             </form>
             <form>
                 {/* By using 'value', we use controlled form to ensure state is the single source of truth */ }
                 <input type="text" placeholder="First Name" name="firstName" value={this.state.firstName} onChange={this.betterFormHandleChange} />
                 <input type="text" placeholder="Last Name" name="lastName" value={this.state.lastName} onChange={this.betterFormHandleChange} />
-                <h1>{this.state.firstName} {this.state.lastName}</h1>
+                <p>State: {this.state.firstName} {this.state.lastName}</p>
+
+                {/* text area in React is a self closing element */}
+                <textarea
+                    name="textArea"
+                    value={this.state.textArea}
+                    onChange={this.betterFormHandleChange}
+                />
+                <p>State: {this.state.textArea}</p>
+
+                <input
+                    name="checkBoxExample"
+                    type="checkbox"
+                    checked={this.state.checkBoxExample}
+                    onChange={this.betterFormHandleChange}
+                />
             </form>
         </>;
     }
