@@ -9,9 +9,11 @@ class FormAppPractical extends Component {
             age: "",
             gender: "",
             location: "",
-            dietary_vegan: false,
-            dietary_nuts: false,
-            dietary_gluten: false
+            dietaryRestrictions: {
+                isVegan: false,
+                isNutAllergy: false,
+                isGlutenAllergy: false
+            }
         };
 
         this.handleFormChange = this.handleFormChange.bind(this);
@@ -20,10 +22,8 @@ class FormAppPractical extends Component {
     handleFormChange(event) {
         const { name, value, type, checked } = event.target;
 
-        if (type === "checkbox") {
-            this.setState({
-                [name]: checked
-            });
+        if (type === "checkbox" && name.startsWith("diet_")) {
+            this.setState(prevState => prevState.dietaryRestrictions[name.slice("diet_".length)] = checked);
             return;
         }
 
@@ -40,12 +40,12 @@ class FormAppPractical extends Component {
             default:
                 genderText = `${this.state.gender[0].toLocaleUpperCase()}${this.state.gender.slice(1)}`;
         }
-        let dietaryRequirements = Object.keys(this.state)
-            .filter((dietaryProperty) => this.state[dietaryProperty])
-            .filter((stateProperty) => stateProperty.startsWith("dietary_"))
-            .map((dietaryReq) => dietaryReq.slice("dietary_".length))
-            .map(dietaryReq => `${dietaryReq[0].toLocaleUpperCase()}${dietaryReq.slice(1)}`)
-            .join(", ");
+        
+        let dietaryRequirements = [];
+        if(this.state.dietaryRestrictions.isVegan) dietaryRequirements.push("Vegan");
+        if(this.state.dietaryRestrictions.isNutAllergy) dietaryRequirements.push("Nut Allergy");
+        if(this.state.dietaryRestrictions.isGlutenAllergy) dietaryRequirements.push("Gluten Allergy");
+        dietaryRequirements = dietaryRequirements.join(", ");
 
         return (
             <main>
@@ -77,20 +77,22 @@ class FormAppPractical extends Component {
 
                     <p>
                         Gender: 
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="male"
-                            onChange={this.handleFormChange}
-                        />
-                        <label>Male</label>
-                        <input
-                            type="radio"
-                            name="gender"
-                            value="female"
-                            onChange={this.handleFormChange}
-                        />
-                        <label>Female</label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="male"
+                                onChange={this.handleFormChange}
+                            /> Male
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                value="female"
+                                onChange={this.handleFormChange}
+                            /> Female
+                        </label>
                     </p>
 
                     <label>Location: 
@@ -108,29 +110,29 @@ class FormAppPractical extends Component {
                     <br />
                     
                     <p>Dietary Restrictions:</p>
-                    <label>Vegan
+                    <label>
                         <input
-                            name="dietary_vegan"
+                            name="diet_isVegan"
                             type="checkbox"
-                            checked={this.state.dietary_vegan}
+                            checked={this.state.dietaryRestrictions.isVegan}
                             onChange={this.handleFormChange}
-                        />
+                        />Vegan
                     </label>
-                    <label>Nut Allergy
+                    <label>
                         <input
-                            name="dietary_nuts"
+                            name="diet_isNutAllergy"
                             type="checkbox"
-                            checked={this.state.dietary_nuts}
+                            checked={this.state.dietaryRestrictions.isNutAllergy}
                             onChange={this.handleFormChange}
-                        />
+                        />Nut Allergy
                     </label>
-                    <label>Gluten Allergy
+                    <label>
                         <input
-                            name="dietary_gluten"
+                            name="diet_isGlutenAllergy"
                             type="checkbox"
-                            checked={this.state.dietary_gluten}
+                            checked={this.state.dietaryRestrictions.isGlutenAllergy}
                             onChange={this.handleFormChange}
-                        />
+                        />Gluten Allergy
                     </label>
                     <br />
                     
