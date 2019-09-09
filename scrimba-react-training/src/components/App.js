@@ -19,7 +19,8 @@ class App extends Component {
             firstName: "",
             lastName: "",
             textArea: "",
-            checkBoxExample: false
+            checkBoxExample: false,
+            radioExampleGender: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleFormFirstNameChange = this.handleFormFirstNameChange.bind(this);
@@ -159,6 +160,35 @@ class App extends Component {
                     checked={this.state.checkBoxExample}
                     onChange={this.betterFormHandleChange}
                 />
+
+                <br />
+                <label>
+                    <input
+                        name="radioExampleGender"
+                        type="radio"
+                        value="male"
+                        checked={this.state.radioExampleGender === "male"}
+                        onChange={this.betterFormHandleChange}
+                    /> Male
+                </label>
+                <label>
+                    <input
+                        name="radioExampleGender"
+                        type="radio"
+                        value="female"
+                        checked={this.state.radioExampleGender === "female"}
+                        onChange={this.betterFormHandleChange}
+                    /> Female
+                </label>
+                <label>
+                    <input
+                        name="radioExampleGender"
+                        type="radio"
+                        value="other"
+                        checked={this.state.radioExampleGender === "other"}
+                        onChange={this.betterFormHandleChange}
+                    /> Other
+                </label>
             </form>
         </>;
     }
