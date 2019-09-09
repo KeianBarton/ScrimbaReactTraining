@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
-import TodoItem from "./TodoItem";
 import ConditionalExample from "./ConditionalExample";
+import FormAppPractical from "./FormAppPractical";
+import TodoItem from "./TodoItem";
+
 import todosData from "../todosData";
 
 class App extends Component {
@@ -211,6 +213,10 @@ class App extends Component {
 
                 <button>Submit</button> {/* in HTML5, a button will automatically submit so you don't always need <input type="submit" ...></input>*/}
             </form>
+
+            <br />
+            <hr />
+            <FormAppPractical />
         </>;
     }
 
